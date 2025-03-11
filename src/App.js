@@ -8,35 +8,40 @@ const App = () => {
 
   const sumNumbers = (inputString) => {
     if (inputString.trim() === "") return 0; 
-
+  
+    // Remove surrounding quotes
     inputString = inputString.replace(/^["']|["']$/g, ""); 
     inputString = inputString.replace(/\\n/g, "\n"); 
-
-    let separator = /,|\n/; 
-
+  
+    let separators = [",", "\n"]; 
+  
     if (inputString.startsWith("//")) {
       const delimiterEnd = inputString.indexOf("\n");
-      const delimiter = inputString.substring(2, delimiterEnd);
-      separator = new RegExp(delimiter);
+      const customDelimiter = inputString.substring(2, delimiterEnd);
+      separators.push(customDelimiter);
       inputString = inputString.substring(delimiterEnd + 1);
     }
-
+  
+    const separatorRegex = new RegExp(separators.map(d => `\\${d}`).join("|"));
+  
     const numList = inputString
-      .split(separator)
-      .map(value => (value.trim() !== "" ? Number(value) : NaN));
-
+      .split(separatorRegex)
+      .filter(value => value.trim() !== "") 
+      .map(value => Number(value));
+  
     if (numList.includes(NaN)) {
       throw new Error("Invalid input: Contains non-numeric values");
     }
-
+  
     const negativeValues = numList.filter(num => num < 0);
     if (negativeValues.length > 0) {
       throw new Error(`Negative numbers not allowed: ${negativeValues.join(", ")}`);
     }
-
+  
     return numList.reduce((sum, num) => sum + num, 0);
   };
-
+  
+  
   const handleCalculate = () => {
     try {
       setError(""); 
