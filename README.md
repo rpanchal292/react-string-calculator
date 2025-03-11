@@ -14,7 +14,7 @@ A simple React app that implements a **String Calculator** supporting different 
 ### 1️⃣ Clone the Repository
 
 ```sh
-git clone git@github.com:rpanchal292/react-string-calculator.git
+git clone https://github.com/rpanchal292/react-string-calculator.git
 cd react-string-calculator
 ```
 
