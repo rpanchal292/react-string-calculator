@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./index.css"; // Import the CSS file
 
 const App = () => {
   const [inputValue, setInputValue] = useState("");
@@ -13,12 +14,11 @@ const App = () => {
 
     let separator = /,|\n/; 
 
-    //  Handle custom delimiter format "//[delimiter]\n[numbers]"
     if (inputString.startsWith("//")) {
-      const delimiterEnd = inputString.indexOf("\n"); 
-      const delimiter = inputString.substring(2, delimiterEnd); 
-      separator = new RegExp(delimiter); 
-      inputString = inputString.substring(delimiterEnd + 1); 
+      const delimiterEnd = inputString.indexOf("\n");
+      const delimiter = inputString.substring(2, delimiterEnd);
+      separator = new RegExp(delimiter);
+      inputString = inputString.substring(delimiterEnd + 1);
     }
 
     const numList = inputString
@@ -39,15 +39,16 @@ const App = () => {
 
   const handleCalculate = () => {
     try {
+      setError(""); 
       setResult(sumNumbers(inputValue)); 
     } catch (err) {
-      setError(err.message); 
+      setError(err.message);
       setResult(null);
     }
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
+    <div className="container">
       <h1>String Calculator</h1>
       <input
         type="text"
@@ -57,8 +58,8 @@ const App = () => {
       />
       <button onClick={handleCalculate}>Calculate</button>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {result !== null && <h2>Result: {result}</h2>}
+      {error && <p className="error">{error}</p>}
+      {result !== null && <h2 className="result">Result: {result}</h2>}
     </div>
   );
 };
