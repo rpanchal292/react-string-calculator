@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -12,16 +12,13 @@ function App() {
       <Router>
         <NavBar/>
         <Routes>
-        <Route path="/login" element={<Login />} />
-
+            <Route path="/login" element={<Login />} />
             <Route path="/" element={<ProtectedRoute><Home/></ProtectedRoute>}></Route>
             <Route path="/about" element={<ProtectedRoute><About/></ProtectedRoute>}></Route>
             <Route path="*" element={<Login />} />
-
         </Routes>
       </Router>
-    </AuthProvider>
-    
+    </AuthProvider>    
   )
 }
 
