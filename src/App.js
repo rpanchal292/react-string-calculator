@@ -6,6 +6,8 @@ import NavBar from "./components/NavBar";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+
 function App() {
   return (
     <AuthProvider>
@@ -13,6 +15,7 @@ function App() {
         <NavBar/>
         <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/signUp" element={<SignUp />} />
             <Route path="/" element={<ProtectedRoute><Home/></ProtectedRoute>}></Route>
             <Route path="/about" element={<ProtectedRoute><About/></ProtectedRoute>}></Route>
             <Route path="*" element={<Login />} />
@@ -23,3 +26,10 @@ function App() {
 }
 
 export default App;
+
+export const add = () => {
+    let test = {'test' : '1','test' : '1','test' : '1',}
+    Object.values(test).forEach((key)=> console.log(key));
+}
+
+
